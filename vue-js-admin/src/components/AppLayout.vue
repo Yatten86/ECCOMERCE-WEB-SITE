@@ -1,11 +1,11 @@
 <template>
     <div class="flex min-h-full bg-gray-200">
         <!-- Sidebar -->
-        <SideBar />
+        <Sidebar :class="{ '-ml-[200px]': !sidebarOpen }" />
 
         <!-- Header -->
         <div class="flex-1">
-            <TopHeader />
+            <TopHeader @toggle-sidebar="toggleSidebar" />
             <!-- Content -->
             <main class="p-6">
                 <div class="p-4 rounded bg-white">
@@ -18,10 +18,13 @@
 </template>
 
 <script setup>
-import SideBar from "./SideBar.vue";
+import { ref } from "vue";
+import Sidebar from "./Sidebar.vue";
 import TopHeader from "./TopHeader.vue";
 
-const props = defineProps({
-    title: String,
-});
+const sidebarOpen = ref(true);
+
+function toggleSidebar() {
+    sidebarOpen.value = !sidebarOpen.value;
+}
 </script>

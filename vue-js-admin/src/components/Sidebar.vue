@@ -1,5 +1,7 @@
 <template>
-    <div class="w-[200px] bg-violet-800 rounded-l-xl text-gray-200 py-4 px-2">
+    <div
+        class="w-[200px] transition-all bg-violet-800 rounded-l-xl text-gray-200 py-4 px-2"
+    >
         <router-link
             :to="{ name: 'app.dashboard' }"
             class="flex items-center p-2 rounded-md transition-colors hover:bg-black/10"
@@ -10,7 +12,7 @@
             <span class="text-md">Dashboard</span>
         </router-link>
         <router-link
-            :to="{ name: 'app.dashboard' }"
+            :to="{ name: 'app.products' }"
             class="flex items-center p-2 rounded-md transition-colors hover:bg-black/10"
         >
             <span class="mr-3 text-gray-400">
@@ -19,7 +21,7 @@
             <span class="text-md">Products</span>
         </router-link>
         <router-link
-            :to="{ name: 'app.dashboard' }"
+            :to="{ name: 'app.users' }"
             class="flex items-center p-2 rounded-md transition-colors hover:bg-black/10"
         >
             <span class="mr-3 text-gray-400">
@@ -28,7 +30,7 @@
             <span class="text-md">Users</span>
         </router-link>
         <router-link
-            :to="{ name: 'app.dashboard' }"
+            :to="{ name: 'app.reports' }"
             class="flex items-center p-2 rounded-md transition-colors hover:bg-black/10"
         >
             <span class="mr-3 text-gray-400">
