@@ -1,7 +1,11 @@
 <template>
     <div class="flex min-h-full bg-gray-200">
         <!-- Sidebar -->
-        <Sidebar :class="{ '-ml-[200px]': !sidebarOpen }" />
+        <Sidebar
+            :class="{
+                '-ml-[200px]': !sidebarOpen,
+            }"
+        />
 
         <!-- Header -->
         <div class="flex-1">
@@ -18,13 +22,32 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 import Sidebar from "./Sidebar.vue";
-import TopHeader from "./TopHeader.vue";
+import TopHeader from "./Navbar.vue";
 
 const sidebarOpen = ref(true);
 
 function toggleSidebar() {
     sidebarOpen.value = !sidebarOpen.value;
 }
+
+//hides the sidebar on smaller screens
+function handleResize() {
+    if (window.outerWidth <= 768) {
+        sidebarOpen.value = false;
+    } else {
+        sidebarOpen.value = true;
+    }
+}
+
+onMounted(() => {
+    console.log("s-a montat");
+    handleResize();
+    window.addEventListener("resize", handleResize);
+});
+
+onUnmounted(() => {
+    window.removeEventListener("resize", handleResize);
+});
 </script>
