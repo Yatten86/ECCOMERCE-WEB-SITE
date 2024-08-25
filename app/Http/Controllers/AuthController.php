@@ -15,9 +15,9 @@ class AuthController extends Controller
             'password' => 'required',
             'remember' => 'boolean'
         ]);
-        $rememeber = $credentials['remember'] ?? false;
+        $remember = $credentials['remember'] ?? false;
         unset($credentials['remember']);
-        if (!Auth::attempt($credentials, $rememeber)) {
+        if (!Auth::attempt($credentials, $remember)) {
             return response([
                 'message' => 'Email or password is incorrect'
             ], 422);
@@ -28,7 +28,7 @@ class AuthController extends Controller
             Auth::logout();
 
             return response([
-                'message' => "You don\'t have permissin to authenticate as admin"
+                'message' => "You don\'t have permission to authenticate as admin"
             ], 403);
         }
 
@@ -43,7 +43,7 @@ class AuthController extends Controller
     {
         /** @var \App\Models\User $user */
         $user = Auth::user();
-        $user->currentAccessToken()->delete(); //hmmm
+        $user->currentAccessToken()->delete();
         return response('', 204);
     }
 }

@@ -48,6 +48,7 @@
 
                 <MenuItem v-slot="{ active }">
                     <button
+                        @click="logout"
                         :class="[
                             active
                                 ? 'bg-violet-500 text-white'
@@ -76,4 +77,14 @@ import {
     GlProfile,
 } from "@kalimahapps/vue-icons";
 import { Menu, MenuButton, MenuItems, MenuItem } from "@headlessui/vue";
+import store from "../store";
+import router from "../router";
+
+function logout() {
+    console.log("Logout called");
+    store.dispatch("logout").then(() => {
+        router.push({ name: "login" });
+        console.log("loged out");
+    });
+}
 </script>
