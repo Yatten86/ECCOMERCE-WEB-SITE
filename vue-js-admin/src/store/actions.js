@@ -15,3 +15,11 @@ export function logout({ commit }) {
         return response;
     });
 }
+
+export function getUser({ commit }) {
+    return axiosClient.get("/user").then((response) => {
+        console.log(response.data);
+        commit("setUser", response.data);
+        return response;
+    });
+}
