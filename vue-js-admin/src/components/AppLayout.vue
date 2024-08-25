@@ -25,6 +25,7 @@
 import { ref, onMounted, onUnmounted } from "vue";
 import Sidebar from "./Sidebar.vue";
 import TopHeader from "./Navbar.vue";
+import store from "../store";
 
 const sidebarOpen = ref(true);
 
@@ -42,6 +43,7 @@ function handleResize() {
 }
 
 onMounted(() => {
+    store.dispatch("getUser");
     console.log("s-a montat");
     handleResize();
     window.addEventListener("resize", handleResize);
