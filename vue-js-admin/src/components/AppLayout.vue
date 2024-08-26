@@ -1,5 +1,5 @@
 <template>
-    <div class="flex min-h-full bg-gray-200">
+    <div v-if="currentUser.id" class="flex min-h-full bg-gray-200">
         <!-- Sidebar -->
         <Sidebar
             :class="{
@@ -19,15 +19,21 @@
             <!-- Content -->
         </div>
     </div>
+    <div v-else class="min-h-full bg-gray-200 flex items-center justify-center">
+        <DisabledSpiner class="animate-spin -ml-1 mr-3 h-8 w-8 text-black" />
+        <span>Please Wait...</span>
+    </div>
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from "vue";
+import { computed, ref, onMounted, onUnmounted } from "vue";
 import Sidebar from "./Sidebar.vue";
 import TopHeader from "./Navbar.vue";
+import DisabledSpiner from "./DisabledSpiner.vue";
 import store from "../store";
 
 const sidebarOpen = ref(true);
+const currentUser = computed(() => store.state.user.data);
 
 function toggleSidebar() {
     sidebarOpen.value = !sidebarOpen.value;
