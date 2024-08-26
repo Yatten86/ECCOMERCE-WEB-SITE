@@ -2,7 +2,7 @@ import axiosClient from "../axios";
 
 export function login({ commit }, data) {
     return axiosClient.post("/login", data).then(({ data }) => {
-        commit("setUser", data.user);
+        commit("setUser", data);
         commit("setToken", data.token);
         return data;
     });

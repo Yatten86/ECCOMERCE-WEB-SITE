@@ -7,7 +7,7 @@
                     alt="user img"
                     class="rounded-full w-9 mr-2"
                 />
-                <small>Petre Nebunu</small>
+                <small>{{ currentUser.name }}</small>
                 <AkChevronDownSmall
                     class="h-5 w-5 text-violet-200 hover:text-violet-100"
                     aria-hidden="true"
@@ -79,6 +79,9 @@ import {
 import { Menu, MenuButton, MenuItems, MenuItem } from "@headlessui/vue";
 import store from "../store";
 import router from "../router";
+import { computed } from "vue";
+
+const currentUser = computed(() => store.state.user.data);
 
 function logout() {
     console.log("Logout called");
