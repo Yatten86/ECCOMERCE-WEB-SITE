@@ -1,3 +1,4 @@
+import axios from "axios";
 import axiosClient from "../axios";
 
 export function login({ commit }, data) {
@@ -22,4 +23,16 @@ export function getUser({ commit }) {
         commit("setUser", response.data);
         return response;
     });
+}
+
+export function getProducts({ commit }) {
+    commit("setProducts", [true]);
+    return axiosClient
+        .get("product")
+        .then((response) => {
+            commit("setProducts", [false, response.data]);
+        })
+        .catch(() => {
+            commit("setProducts", [false]);
+        });
 }
