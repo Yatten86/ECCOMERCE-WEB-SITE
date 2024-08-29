@@ -29,7 +29,7 @@
                 <div>
                     <input
                         v-model="search"
-                        @change="getProducts(null)"
+                        @change.prevent="getProducts(null)"
                         placeholder="Type to Search products"
                         class="appearance-none relative block w-48 px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:ring-violet-500 focus:z-10 sm:text-sm"
                     />
@@ -81,6 +81,40 @@
                             </tr>
                         </tbody>
                     </table>
+                    <div class="flex justify-between items-center mt-5">
+                        <span>
+                            Showing from {{ products.from }} to
+                            {{ products.to }}
+                        </span>
+                        <nav
+                            v-if="products.total > products.limit"
+                            class="relative z-0 inline-flex justify-center rounded-md shadow-sm -space-x-px"
+                            aria-label="Pagination"
+                        >
+                            <a
+                                v-for="(link, i) of products.links"
+                                :key="i"
+                                :disabled="!link.url"
+                                href="#"
+                                @click="getForPage($event, link)"
+                                aria-current="page"
+                                class="relative inline-flex items-center px-4 py-2 border text-sm font-medium whitespace-nowrap"
+                                :class="
+                                    (link.active
+                                        ? 'z-10 bg-violet-500 text-violet-600'
+                                        : 'bg-whte border-gray-300 text-gray-500 hover:bg-gray-50',
+                                    i === 0 ? 'rounded-md' : '',
+                                    i === products.links.length - 1
+                                        ? 'rounded-r-md'
+                                        : '',
+                                    !link.url
+                                        ? 'bg-gray-100 text-gray-700'
+                                        : '')
+                                "
+                                v-html="link.label"
+                            ></a>
+                        </nav>
+                    </div>
                 </div>
             </template>
         </div>
@@ -101,7 +135,14 @@ onMounted(() => {
     getProducts();
 });
 
-function getProducts() {
-    store.dispatch("getProducts");
+function getProducts(url = null) {
+    store.dispatch("getProducts", { url });
+}
+
+function getForPage(event, link) {
+    if (!link.url || link.active) {
+        return;
+    }
+    getProducts(link.url);
 }
 </script>
