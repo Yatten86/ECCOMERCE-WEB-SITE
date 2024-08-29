@@ -25,10 +25,11 @@ export function getUser({ commit }) {
     });
 }
 
-export function getProducts({ commit }) {
+export function getProducts({ commit }, { url = null }) {
     commit("setProducts", [true]);
+    url = url || "/product";
     return axiosClient
-        .get("product")
+        .get(url)
         .then((response) => {
             commit("setProducts", [false, response.data]);
         })
