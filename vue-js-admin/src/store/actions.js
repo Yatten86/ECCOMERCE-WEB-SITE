@@ -1,4 +1,3 @@
-import axios from "axios";
 import axiosClient from "../axios";
 
 export function login({ commit }, data) {
@@ -25,11 +24,14 @@ export function getUser({ commit }) {
     });
 }
 
-export function getProducts({ commit }, { url = null }) {
+export function getProducts(
+    { commit },
+    { url = null, search = "", perPage = "" }
+) {
     commit("setProducts", [true]);
     url = url || "/product";
     return axiosClient
-        .get(url)
+        .get(url, { params: { search, per_page: perPage } })
         .then((response) => {
             commit("setProducts", [false, response.data]);
         })

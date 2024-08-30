@@ -15,15 +15,15 @@
                 <div class="flex itmes-center justify-center">
                     <span class="whitespace-nowarp mr-3">Per page</span>
                     <select
-                        @change="getProducts"
+                        @change="getProducts(null)"
                         v-model="perPage"
                         class="appearance-none relative block w-24 px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:ring-violet-500 focus:z-10 sm:text-sm"
                     >
                         <option value="5">5</option>
-                        <option value="5">10</option>
-                        <option value="5">20</option>
-                        <option value="5">50</option>
-                        <option value="5">100</option>
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
                     </select>
                 </div>
                 <div>
@@ -136,7 +136,11 @@ onMounted(() => {
 });
 
 function getProducts(url = null) {
-    store.dispatch("getProducts", { url });
+    store.dispatch("getProducts", {
+        url,
+        search: search.value,
+        perPage: perPage.value,
+    });
 }
 
 function getForPage(event, link) {
