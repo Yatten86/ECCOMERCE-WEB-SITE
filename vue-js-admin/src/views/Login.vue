@@ -107,7 +107,7 @@ import { ref } from "vue";
 import GuestLayout from "../components/GuestLayout.vue";
 import store from "../store";
 import router from "../router";
-import DisabledSpiner from "../components/DisabledSpiner.vue";
+import DisabledSpiner from "../components/core/DisabledSpiner.vue";
 
 let loading = ref(false);
 let errorMsg = ref("");
