@@ -29,7 +29,7 @@
 import { computed, ref, onMounted, onUnmounted } from "vue";
 import Sidebar from "./Sidebar.vue";
 import TopHeader from "./Navbar.vue";
-import DisabledSpiner from "./DisabledSpiner.vue";
+import DisabledSpiner from "./core/DisabledSpiner.vue";
 import store from "../store";
 
 const sidebarOpen = ref(true);
