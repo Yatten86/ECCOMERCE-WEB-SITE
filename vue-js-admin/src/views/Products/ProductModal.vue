@@ -154,10 +154,10 @@
 
 <script setup>
 import { computed, onMounted, ref } from "vue";
-import DisabledSpiner from "../components/core/DisabledSpiner.vue";
-import store from "../store";
-import { PRODUCTS_PER_PAGE } from "../constants";
-import TableHeaderCell from "../components/core/table/TableHeaderCell.vue";
+import DisabledSpiner from "../../components/core/DisabledSpiner.vue";
+import store from "../../store";
+import { PRODUCTS_PER_PAGE } from "../../constants";
+import TableHeaderCell from "../../components/core/table/TableHeaderCell.vue";
 
 const perPage = ref(PRODUCTS_PER_PAGE);
 const search = ref("");
