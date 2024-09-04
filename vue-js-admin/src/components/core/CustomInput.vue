@@ -34,7 +34,7 @@
                     :name="name"
                     :required="required"
                     :value="props.modelValue"
-                    @input="emit('change', $event.target.files[0])"
+                    @input="emit('change', $event.target.value)"
                     :class="inputClasses"
                     :placeholder="label"
                     step="0.01"

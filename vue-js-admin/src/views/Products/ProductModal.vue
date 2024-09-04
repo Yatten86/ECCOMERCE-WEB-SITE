@@ -29,10 +29,10 @@
                         <DialogPanel
                             class="w-full max-w-md transform overflow-hidden rounded-2xl bg-white text-left align-middle shadow-xl transition-all"
                         >
-                            <DisabledSpiner
+                            <!-- <DisabledSpiner
                                 v-if="loading"
                                 class="animate-spin absolute left-0 top-100 bg-white right-0 bottom-0 flex items-center justify-center"
-                            />
+                            /> -->
 
                             <header
                                 class="flex py-3 px-4 justify-between items-center"
@@ -133,6 +133,13 @@ const props = defineProps({
     },
 });
 
+const emit = defineEmits(["update:modelValue", "close"]);
+
+const show = computed({
+    get: () => props.modelValue,
+    set: (value) => emit("update:modelValue", value),
+});
+
 const product = ref({
     id: props.product.id,
     title: props.product.id,
@@ -141,17 +148,10 @@ const product = ref({
     price: props.product.price,
 });
 
-const emit = defineEmits(["update:modelValue", "close"]);
-
-const show = computed({
-    get: () => props.modelValue,
-    set: (value) => emit("update:modelValue", value),
-});
-
 onUpdated(() => {
     product.value = {
         id: props.product.id,
-        title: props.product.id,
+        title: props.product.title,
         image: props.product.image,
         description: props.product.description,
         price: props.product.price,
@@ -177,9 +177,11 @@ function onSubmit() {
     } else {
         store.dispatch("createProduct", product.value).then((response) => {
             loading.value = false;
-            //TODO show notification
-            store.dispatch("getProducts");
-            closeModal();
+            if (response.status === 201) {
+                //TODO show notification
+                store.dispatch("getProducts");
+                closeModal();
+            }
         });
     }
 }
