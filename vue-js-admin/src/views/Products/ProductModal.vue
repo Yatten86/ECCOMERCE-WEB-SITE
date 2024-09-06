@@ -65,9 +65,7 @@
                                         type="file"
                                         class="mb-2"
                                         label="Product Image"
-                                        @change="
-                                            (file) => (product.image = file)
-                                        "
+                                        v-model="product.image"
                                     />
                                     <CustomInput
                                         type="textarea"
@@ -142,7 +140,7 @@ const show = computed({
 
 const product = ref({
     id: props.product.id,
-    title: props.product.id,
+    title: props.product.title,
     image: props.product.image,
     description: props.product.description,
     price: props.product.price,
@@ -170,7 +168,7 @@ function onSubmit() {
             loading.value = false;
             if (response.status === 200) {
                 //TODO show notification
-                store.dispatch("getProducts");
+                store.dispatch("getProducts", {});
                 closeModal();
             }
         });
@@ -179,7 +177,7 @@ function onSubmit() {
             loading.value = false;
             if (response.status === 201) {
                 //TODO show notification
-                store.dispatch("getProducts");
+                store.dispatch("getProducts", {});
                 closeModal();
             }
         });

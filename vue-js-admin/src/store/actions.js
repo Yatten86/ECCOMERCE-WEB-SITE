@@ -29,7 +29,8 @@ export function getProducts(
     { url = null, search = "", perPage = "", sort_field, sort_direction }
 ) {
     commit("setProducts", [true]);
-    url = url || "/product";
+
+    if (!url) url = "/products";
     return axiosClient
         .get(url, {
             params: { search, per_page: perPage, sort_field, sort_direction },
@@ -40,4 +41,45 @@ export function getProducts(
         .catch(() => {
             commit("setProducts", [false]);
         });
+}
+
+export function createProduct({ commit }, product) {
+    const form = new FormData();
+    form.append("title", product.title);
+    form.append("description", product.description);
+    form.append("price", product.price);
+
+    // Check if an image is provided
+    if (product.image instanceof File) {
+        form.append("image", product.image);
+    }
+    for (let pair of form.entries()) {
+        console.log(pair[0] + ": " + pair[1]);
+    }
+
+    return axiosClient.post("/products", form);
+}
+
+// Updated updateProduct
+export function updateProduct({ commit }, product) {
+    const form = new FormData();
+    const id = product.id; // Make sure product.id exists before updating
+
+    // Append product fields to FormData
+    form.append("title", product.title);
+    form.append("description", product.description);
+    form.append("price", product.price);
+    form.append("_method", "PUT");
+
+    // Only append image if it exists
+    if (product.image instanceof File) {
+        form.append("image", product.image);
+    }
+
+    // Send POST request with FormData
+    return axiosClient.post(`/products/${id}`, form, {
+        headers: {
+            "Content-Type": "multipart/form-data",
+        },
+    });
 }
