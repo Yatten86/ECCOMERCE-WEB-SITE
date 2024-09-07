@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-white p-4 rounded-lg shadow">
+    <div class="bg-white p-4 rounded-lg shadow animate-fade-in-down">
         <div class="flex justify-between border-b-2 pb-3">
             <div class="flex itmes-center justify-center">
                 <span class="whitespace-nowarp mr-3">Per page</span>
@@ -28,7 +28,7 @@
         <div>
             <table class="table-auto w-full">
                 <thead>
-                    <tr class="">
+                    <tr>
                         <TableHeaderCell
                             @click="sortProduct"
                             field="id"
@@ -81,7 +81,12 @@
                     </tr>
                 </tbody>
                 <tbody v-else>
-                    <tr v-for="product of products.data" :key="product.id">
+                    <tr
+                        v-for="(product, index) of products.data"
+                        :key="product.id"
+                        class="animate-fade-in-down"
+                        :style="{ 'animation-delay': `${index * 0.05}s` }"
+                    >
                         <td class="border-b p-2">{{ product.id }}</td>
                         <td class="border-b p-2">
                             <img
