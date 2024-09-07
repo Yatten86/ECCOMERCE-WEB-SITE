@@ -43,7 +43,7 @@
                                 >
                                     {{
                                         product.id
-                                            ? `Update product: "${prpops.product.title}"`
+                                            ? `Update product: "${props.product.title}"`
                                             : "Create new Product"
                                     }}
                                 </DialogTitle>

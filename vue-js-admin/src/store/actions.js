@@ -44,6 +44,10 @@ export function getProducts(
         });
 }
 
+export function getProduct({}, id) {
+    return axiosClient.get(`/products/${id}`);
+}
+
 export function createProduct({ commit }, product) {
     const form = new FormData();
     form.append("title", product.title);

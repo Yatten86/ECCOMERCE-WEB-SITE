@@ -134,6 +134,9 @@
                                                             : 'text-gray-900',
                                                         'group flex w-full items-center rounded-md px-2 py-2 text-sm',
                                                     ]"
+                                                    @click="
+                                                        editProduct(product)
+                                                    "
                                                 >
                                                     <CiEdit
                                                         :active="active"
@@ -219,6 +222,8 @@ import TableHeaderCell from "../../components/core/table/TableHeaderCell.vue";
 import { Menu, MenuButton, MenuItems, MenuItem } from "@headlessui/vue";
 import { CiEdit, FlDelete, MdSharpArrowDropDown } from "@kalimahapps/vue-icons";
 
+const emit = defineEmits(["clickEdit"]);
+
 const perPage = ref(PRODUCTS_PER_PAGE);
 const search = ref("");
 const products = computed(() => store.state.products);
@@ -270,5 +275,9 @@ function deleteProduct(product) {
         store.dispatch("getProducts");
     });
     getProducts();
+}
+
+function editProduct(product) {
+    emit("clickEdit", product);
 }
 </script>
