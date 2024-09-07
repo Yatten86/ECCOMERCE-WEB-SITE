@@ -26,11 +26,12 @@ export function getUser({ commit }) {
 
 export function getProducts(
     { commit },
-    { url = null, search = "", perPage = "", sort_field, sort_direction }
+    { url = null, search = "", perPage = "", sort_field, sort_direction } = {}
 ) {
     commit("setProducts", [true]);
 
-    if (!url) url = "/products";
+    url = url || "/products";
+    // if (!url) url = "/products";
     return axiosClient
         .get(url, {
             params: { search, per_page: perPage, sort_field, sort_direction },
@@ -82,4 +83,8 @@ export function updateProduct({ commit }, product) {
             "Content-Type": "multipart/form-data",
         },
     });
+}
+
+export function deleteProduct({ commit }, id) {
+    return axiosClient.delete(`/products/${id}`);
 }
