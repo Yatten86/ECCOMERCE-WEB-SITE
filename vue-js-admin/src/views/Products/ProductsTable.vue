@@ -84,7 +84,6 @@
                     <tr
                         v-for="(product, index) of products.data"
                         :key="product.id"
-                        class="animate-fade-in-down"
                         :style="{ 'animation-delay': `${index * 0.05}s` }"
                     >
                         <td class="border-b p-2">{{ product.id }}</td>
