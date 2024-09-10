@@ -13,7 +13,7 @@
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
         <div class="mb-4">
             <x-text-input id="loginEmail" type="email" name="email" :value="old('email')" lable="Email"
-                placeholder="Your email address" />
+                placeholder="Your email address" autofocus />
         </div>
         <div class="mb-4">
             <x-text-input id="loginPassword" type="password" name="password" placeholder="Your password" />
