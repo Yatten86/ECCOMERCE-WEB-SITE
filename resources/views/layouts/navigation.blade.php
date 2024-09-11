@@ -7,7 +7,7 @@
         :class="mobileMenuOpen ? 'left-0' : '-left-[220px]'">
         <ul>
             <li>
-                <a href="/src/index.html" class="block py-2 px-3 transition-colors hover:bg-slate-800">Home</a>
+                <a href="{{route('home')}}" class="block py-2 px-3 transition-colors hover:bg-slate-800">Home</a>
             </li>
             <li>
                 <a href="#" class="block py-2 px-3 transition-colors hover:bg-slate-800">Categories</a>
@@ -127,7 +127,7 @@
     <nav class="hidden md:block">
         <ul class="grid grid-flow-col">
             <li>
-                <a href="/src/index.html" class="block py-navbar-item px-navbar-item hover:bg-slate-900">Home</a>
+                <a href="{{route('home')}}" class="block py-navbar-item px-navbar-item hover:bg-slate-900">Home</a>
             </li>
             <li>
                 <a href="#" class="block py-navbar-item px-navbar-item hover:bg-slate-900">Categories</a>
@@ -243,7 +243,7 @@
                 <li>
                     <a href="{{route('register')}}"
                         class=" inline-flex items-center text-white bg-emerald-600 py-2 px-3 rounded shadow-md
-                                                                                    hover:bg-emerald-700 active:bg-emerald-800 transition-colors mx-5">
+                                                                                            hover:bg-emerald-700 active:bg-emerald-800 transition-colors mx-5">
                         Register now
                     </a>
                 </li>
