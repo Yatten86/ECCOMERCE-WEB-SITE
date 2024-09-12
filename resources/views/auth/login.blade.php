@@ -10,6 +10,8 @@
             <a href="{{route('register')}}" class="text-sm text-purple-700 hover:text-purple-600">create new account</a>
         </p>
 
+        <x-auth-session-status class="mb-4" :status="session('status')" />
+
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
         <div class="mb-4">
             <x-text-input id="loginEmail" type="email" name="email" :value="old('email')" lable="Email"
