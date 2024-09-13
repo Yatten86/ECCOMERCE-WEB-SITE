@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [ProductController::class, 'index'])->name('home');
+Route::get('/products/{product:slug}', [ProductController::class, 'view'])->name('product.view');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

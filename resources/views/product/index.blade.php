@@ -7,7 +7,7 @@
                 class="border border-1 border-gray-200 rounded-md hover:border-purple-600 transition-colors bg-white w-[300px] h-[450px] flex flex-col">
                 <div class="flex items-center justify-center h-full">
 
-                    <a href="/src/product.html" class="block overflow-hidden ">
+                    <a href="{{route('product.view', $product->slug)}}" class="block overflow-hidden ">
                         <!-- Set a fixed height for the image container -->
                         <div class="h-[250px] w-full flex items-center justify-center p-4 ">
                             <!-- need to check the hover efect -->
@@ -18,7 +18,7 @@
                 </div>
                 <div class="p-4 flex flex-col flex-grow">
                     <h3 class="text-lg font-semibold mb-2">
-                        <a href="/src/product.html">
+                        <a href="{{route('product.view', $product->slug)}}">
                             {{$product->title}}
                         </a>
                     </h3>
