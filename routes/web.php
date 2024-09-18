@@ -9,17 +9,17 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['guestOrVerified'])->group(function () {
     Route::get('/', [ProductController::class, 'index'])->name('home');
-    Route::get('/products/{product:slug}', [ProductController::class, 'view'])->name('product.view');
+    Route::get('/product/{product:slug}', [ProductController::class, 'view'])->name('product.view');
 
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->middleware(['auth', 'verified'])->name('dashboard');
 
-    Route::prefix('/cart')->name('cart')->group(function () {
-        Route::get('/', [CartController::class, 'index'])->name('index');
-        Route::get('/add/{product:slug}', [CartController::class, 'add'])->name('add');
-        Route::get('/remove/{product:slug}', [CartController::class, 'remove'])->name('remove');
-        Route::get('/update-quantity/{product:slug}', [CartController::class, 'updateQuantity'])->name('update-quantity');
+    Route::prefix('/cart')->group(function () {
+        Route::get('/', [CartController::class, 'index'])->name('cart.index');
+        Route::post('/add/{product:slug}', [CartController::class, 'add'])->name('cart.add');
+        Route::post('/remove/{product:slug}', [CartController::class, 'remove'])->name('cart.remove');
+        Route::post('/update-quantity/{product:slug}', [CartController::class, 'updateQuantity'])->name('cart.update-quantity');
     });
 });
 

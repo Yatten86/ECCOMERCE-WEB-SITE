@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\Cart;
+
 use App\Models\CartItem;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cookie;
+use App\Http\Helpers\Cart;
+
 
 
 class CartController extends Controller
@@ -43,7 +45,7 @@ class CartController extends Controller
             } else {
                 $data = [
                     'user_id' => $request->user()->id,
-                    'prduct_id' => $product->id,
+                    'product' => $product->id,
                     'quantity' => $quantity,
                 ];
 
@@ -54,7 +56,8 @@ class CartController extends Controller
                 'count' => Cart::getCartItemsCount()
             ]);
         } else {
-            $cartItems = json_decode($request->cookie('cart_items', []), true);
+            $cookieValue = $request->cookie('cart_items'); // Get the cookie value
+            $cartItems = $cookieValue ? json_decode($cookieValue, true) : []; // Decode only if it's a valid string
             $productFound = false;
             foreach ($cartItems as &$item) {
                 if ($item['product_id'] === $product->id) {
