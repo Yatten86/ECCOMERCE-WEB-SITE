@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Helpers;
+namespace App\Http\Helpers;
 
 use App\Models\CartItem;
 
@@ -44,8 +44,9 @@ class Cart
     public static function getCookieCartItems()
     {
         $request = \request();
+        $cookieValue = $request->cookie('cart_items', '[]');
 
-        return json_decode($request->cookie('cart_items', []), true);
+        return json_decode($cookieValue, true);
     }
 
     public static function getCountFromItems($cartItems)
