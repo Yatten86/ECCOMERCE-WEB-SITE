@@ -16,7 +16,7 @@ class CartController extends Controller
 {
     public function index()
     {
-        $cartItems = Cart::getCartItems()();
+        $cartItems = Cart::getCartItems();
 
         $ids = Arr::pluck($cartItems, 'product_id');
         $products = Product::query()->whereIn('id', $ids)->get();
@@ -45,7 +45,7 @@ class CartController extends Controller
             } else {
                 $data = [
                     'user_id' => $request->user()->id,
-                    'product' => $product->id,
+                    'product_id' => $product->id,
                     'quantity' => $quantity,
                 ];
 
