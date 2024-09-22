@@ -62,7 +62,7 @@ class Cart
     {
         $request = \request();
         $cartItems = self::getCookieCartItems();
-        $dbCartItems = CartItem::where(['user_id' => $request->user()->id->get()->keyBy('produce_id')]);
+        $dbCartItems = CartItem::where(['user_id' => $request->user()->id])->get()->keyBy('produce_id');
         $newCartItems = [];
         foreach ($cartItems as $cartItem) {
             if (isset($dbCartItems[$cartItem['product_id']])) {

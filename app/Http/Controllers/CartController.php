@@ -101,7 +101,7 @@ class CartController extends Controller
                     break;
                 }
             }
-            Cookie::queue('cart_items', json_encode($cartItems), 60 * 24 * 30); //clears after 30 days
+            Cookie::queue('cart_items', json_encode($cartItems), 60 * 24 * 30); // update the cookie
 
             return response(['count' => Cart::getCountFromItems($cartItems)]);
         }
