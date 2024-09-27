@@ -22,7 +22,7 @@ class Customer extends Model
 
     private function _getAddresses(): HasOne
     {
-        return $this->hasOne(CustomerAdress::class, 'customer_id', 'user_id');
+        return $this->hasOne(CustomerAddress::class, 'customer_id', 'user_id');
     }
 
     public function shippingAddress(): HasOne

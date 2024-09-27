@@ -1,141 +1,261 @@
 <x-app-layout>
-    <div class="container lg:w-2/3 xl:w-2/3 mx-auto">
-        <div class="grid grid-cols-1 sm:grid-cols-5 items-start gap-6">
-            <div class="col-span-3 bg-white p-4 rounded-lg shadow">
-                <!-- Profile Details -->
-                <div class="mb-6">
-                    <h2 class="text-xl mb-5">Your Profile</h2>
-                    <div class="mb-4">
-                        <input placeholder="Your Name" type="text" name="name"
-                            class="border-gray-300 focus:border-purple-500 focus:outline-none focus:ring-purple-500 rounded-md w-full" />
-                    </div>
-                    <div class="mb-4">
-                        <input placeholder="Your Email" type="email" name="email"
-                            class="border-gray-300 focus:border-purple-500 focus:outline-none focus:ring-purple-500 rounded-md w-full" />
-                    </div>
-                    <div class="mb-4">
-                        <input placeholder="Your Phone" type="text" name="phone"
-                            class="border-gray-300 focus:border-purple-500 focus:outline-none focus:ring-purple-500 rounded-md w-full" />
-                    </div>
-                </div>
-                <!--/ Profile Details -->
-
-                <!-- Billing Address -->
-                <div class="mb-6">
-                    <h2 class="text-xl mb-5">Billing Address</h2>
-                    <div class="flex gap-3">
-                        <div class="mb-4 flex-1">
-                            <input placeholder="Address 1" type="text" name="billing_address_1"
-                                class="border-gray-300 focus:border-purple-500 focus:outline-none focus:ring-purple-500 rounded-md w-full" />
-                        </div>
-                        <div class="mb-4 flex-1">
-                            <input placeholder="Address 2" type="text" name="billing_address_2"
-                                class="border-gray-300 focus:border-purple-500 focus:outline-none focus:ring-purple-500 rounded-md w-full" />
-                        </div>
-                    </div>
-                    <div class="flex gap-3">
-                        <div class="mb-4 flex-1">
-                            <input placeholder="City" type="text" name="billing_city"
-                                class="border-gray-300 focus:border-purple-500 focus:outline-none focus:ring-purple-500 rounded-md w-full" />
-                        </div>
-                        <div class="mb-4 flex-1">
-                            <input placeholder="State" type="text" name="billing_state"
-                                class="border-gray-300 focus:border-purple-500 focus:outline-none focus:ring-purple-500 rounded-md w-full" />
-                        </div>
-                    </div>
-                    <div class="flex gap-3">
-                        <div class="mb-4 flex-1">
-                            <select placeholder="Country" type="text" name="billing_country"
-                                class="border-gray-300 focus:border-purple-500 focus:outline-none focus:ring-purple-500 rounded-md w-full">
-                                <option value="">Country</option>
-                                <option value="ge">Georgia</option>
-                                <option value="de">Germany</option>
-                                <option value="in">India</option>
-                                <option value="us">United Kingdom</option>
-                                <option value="uk">United States</option>
-                            </select>
-                        </div>
-                        <div class="mb-4 flex-1">
-                            <input placeholder="Zipcode" type="text" name="billing_zipcode"
-                                class="border-gray-300 focus:border-purple-500 focus:outline-none focus:ring-purple-500 rounded-md w-full" />
-                        </div>
-                    </div>
-                </div>
-                <!--/ Billing Address -->
-
-                <!-- Shipping Address -->
-                <div class="mb-6">
-                    <div class="flex items-center justify-between mb-5">
-                        <h2 class="text-xl">Shipping Address</h2>
-                        <div class="flex items-center">
-                            <input id="sameAsBillingAddress" type="checkbox"
-                                class="mr-3 rounded border-gray-300 text-purple-500 focus:ring-purple-500" />
-                            <label for="sameAsBillingAddress">Same as Billing</label>
-                        </div>
-                    </div>
-                    <div class="flex gap-3">
-                        <div class="mb-4 flex-1">
-                            <input placeholder="Address 1" type="text" name="shipping_address_1"
-                                class="border-gray-300 focus:border-purple-500 focus:outline-none focus:ring-purple-500 rounded-md w-full" />
-                        </div>
-                        <div class="mb-4 flex-1">
-                            <input placeholder="Address 2" type="text" name="shipping_address_2"
-                                class="border-gray-300 focus:border-purple-500 focus:outline-none focus:ring-purple-500 rounded-md w-full" />
-                        </div>
-                    </div>
-                    <div class="flex gap-3">
-                        <div class="mb-4 flex-1">
-                            <input placeholder="City" type="text" name="shipping_city"
-                                class="border-gray-300 focus:border-purple-500 focus:outline-none focus:ring-purple-500 rounded-md w-full" />
-                        </div>
-                        <div class="mb-4 flex-1">
-                            <input placeholder="State" type="text" name="shipping_state"
-                                class="border-gray-300 focus:border-purple-500 focus:outline-none focus:ring-purple-500 rounded-md w-full" />
-                        </div>
-                    </div>
-                    <div class="flex gap-3">
-                        <div class="mb-4 flex-1">
-                            <select placeholder="Country" type="text" name="shipping_country"
-                                class="border-gray-300 focus:border-purple-500 focus:outline-none focus:ring-purple-500 rounded-md w-full">
-                                <option value="">Country</option>
-                                <option value="ge">Georgia</option>
-                                <option value="de">Germany</option>
-                                <option value="in">India</option>
-                                <option value="us">United Kingdom</option>
-                                <option value="uk">United States</option>
-                            </select>
-                        </div>
-                        <div class="mb-4 flex-1">
-                            <input placeholder="Zipcode" type="text" name="shipping_zipcode"
-                                class="border-gray-300 focus:border-purple-500 focus:outline-none focus:ring-purple-500 rounded-md w-full" />
-                        </div>
-                    </div>
-                </div>
-                <!--/ Shipping Address -->
-
-                <button
-                    class="btn-primary bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-700 w-full">Update</button>
+    <div x-data="{
+            flashMessage: '{{\Illuminate\Support\Facades\Session::get('flash_message')}}',
+            init() {
+                if (this.flashMessage) {
+                    setTimeout(() => this.$dispatch('notify', {message: this.flashMessage}), 200)
+                }
+            }
+        }" class="container mx-auto lg:w-2/3 p-5">
+        @if (session('error'))
+            <div class="py-2 px-3 bg-red-500 text-white mb-2 rounded">
+                {{ session('error') }}
             </div>
+        @endif
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
+            <div class="bg-white p-3 shadow rounded-lg md:col-span-2">
+                <form x-data="{
+                    countries: {{ json_encode($countries) }},
+                    billingAddress: {{ json_encode([
+                        'address1' => old('billing.address1', $billingAddress->address1),
+                        'address2' => old('billing.address2', $billingAddress->address2),
+                        'city' => old('billing.city', $billingAddress->city),
+                        'state' => old('billing.state', $billingAddress->state),
+                        'country_code' => old('billing.country_code', $billingAddress->country_code),
+                        'zipcode' => old('billing.zipcode', $billingAddress->zipcode),
+                    ]) }},
+                    shippingAddress: {{ json_encode([
+                        'address1' => old('shipping.address1', $shippingAddress->address1),
+                        'address2' => old('shipping.address2', $shippingAddress->address2),
+                        'city' => old('shipping.city', $shippingAddress->city),
+                        'state' => old('shipping.state', $shippingAddress->state),
+                        'country_code' => old('shipping.country_code', $shippingAddress->country_code),
+                        'zipcode' => old('shipping.zipcode', $shippingAddress->zipcode),
+                    ]) }},
+                    get billingCountryStates() {
+                        const country = this.countries.find(c => c.code === this.billingAddress.country_code)
+                        if (country && country.states) {
+                            return JSON.parse(country.states);
+                        }
+                        return null;
+                    },
+                    get shippingCountryStates() {
+                        const country = this.countries.find(c => c.code === this.shippingAddress.country_code)
+                        if (country && country.states) {
+                            return JSON.parse(country.states);
+                        }
+                        return null;
+                    }
+                }" action="{{ route('profile') }}" method="post">
+                    @csrf
+                    <h2 class="text-xl font-semibold mb-2">Profile Details</h2>
+                    <div class="grid grid-cols-2 gap-3 mb-3">
+                        <x-text-input
+                            type="text"
+                            name="first_name"
+                            value="{{old('first_name', $customer->first_name)}}"
+                            placeholder="First Name"
+                            class="w-full focus:border-purple-600 focus:ring-purple-600 border-gray-300 rounded"
+                        />
+                        <x-text-input
+                            type="text"
+                            name="last_name"
+                            value="{{old('last_name', $customer->last_name)}}"
+                            placeholder="Last Name"
+                            class="w-full focus:border-purple-600 focus:ring-purple-600 border-gray-300 rounded"
+                        />
+                    </div>
+                    <div class="mb-3">
+                        <x-text-input
+                            type="text"
+                            name="email"
+                            value="{{old('email', $user->email)}}"
+                            placeholder="Your Email"
+                            class="w-full focus:border-purple-600 focus:ring-purple-600 border-gray-300 rounded"
+                        />
+                    </div>
+                    <div class="mb-3">
+                        <x-text-input
+                            type="text"
+                            name="phone"
+                            value="{{old('phone', $customer->phone)}}"
+                            placeholder="Your Phone"
+                            class="w-full focus:border-purple-600 focus:ring-purple-600 border-gray-300 rounded"
+                        />
+                    </div>
 
-            <div class="col-span-2 bg-white p-4 rounded-lg shadow">
-                <h2 class="text-xl mb-5">Your Account</h2>
-                <div class="mb-4">
-                    <input type="password" name="password" placeholder="Your Current password"
-                        class="border-gray-300 focus:border-purple-500 focus:outline-none focus:ring-purple-500 rounded-md w-full" />
-                </div>
-                <div class="mb-4">
-                    <input type="password" name="password" placeholder="New password"
-                        class="border-gray-300 focus:border-purple-500 focus:outline-none focus:ring-purple-500 rounded-md w-full" />
-                </div>
-                <div class="mb-4">
-                    <input type="password" name="password" placeholder="Repeat new password"
-                        class="border-gray-300 focus:border-purple-500 focus:outline-none focus:ring-purple-500 rounded-md w-full" />
-                </div>
-                <div>
-                    <button
-                        class="btn-primary bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-700">Update</button>
-                </div>
+                    <h2 class="text-xl mt-6 font-semibold mb-2">Billing Address</h2>
+                    <div class="grid grid-cols-2 gap-3 mb-3">
+                        <div>
+                            <x-text-input
+                                type="text"
+                                name="billing[address1]"
+                                x-model="billingAddress.address1"
+                                placeholder="Address 1"
+                                class="w-full focus:border-purple-600 focus:ring-purple-600 border-gray-300 rounded"
+                            />
+                        </div>
+                        <div>
+                            <x-text-input
+                                type="text"
+                                name="billing[address2]"
+                                x-model="billingAddress.address2"
+                                placeholder="Address 2"
+                                class="w-full focus:border-purple-600 focus:ring-purple-600 border-gray-300 rounded"
+                            />
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3 mb-3">
+                        <div>
+                            <x-text-input
+                                type="text"
+                                name="billing[city]"
+                                x-model="billingAddress.city"
+                                placeholder="City"
+                                class="w-full focus:border-purple-600 focus:ring-purple-600 border-gray-300 rounded"
+                            />
+                        </div>
+                        <div>
+                            <x-text-input
+                                type="text"
+                                name="billing[zipcode]"
+                                x-model="billingAddress.zipcode"
+                                placeholder="ZipCode"
+                                class="w-full focus:border-purple-600 focus:ring-purple-600 border-gray-300 rounded"
+                            />
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3 mb-3">
+                        <div>
+                            <x-text-input type="select"
+                                     name="billing[country_code]"
+                                     x-model="billingAddress.country_code"
+                                     class="w-full focus:border-purple-600 focus:ring-purple-600 border-gray-300 rounded">
+                                <option value="">Select Country</option>
+                                <template x-for="country of countries" :key="country.code">
+                                    <option :selected="country.code === billingAddress.country_code"
+                                            :value="country.code" x-text="country.name"></option>
+                                </template>
+                            </x-text-input>
+                        </div>
+                        <div>
+                            <template x-if="billingCountryStates">
+                                <x-text-input type="select"
+                                         name="billing[state]"
+                                         x-model="billingAddress.state"
+                                         class="w-full focus:border-purple-600 focus:ring-purple-600 border-gray-300 rounded">
+                                    <option value="">Select State</option>
+                                    <template x-for="[code, state] of Object.entries(billingCountryStates)"
+                                              :key="code">
+                                        <option :selected="code === billingAddress.state"
+                                                :value="code" x-text="state"></option>
+                                    </template>
+                                </x-text-input>
+                            </template>
+                            <template x-if="!billingCountryStates">
+                                <x-text-input
+                                    type="text"
+                                    name="billing[state]"
+                                    x-model="billingAddress.state"
+                                    placeholder="State"
+                                    class="w-full focus:border-purple-600 focus:ring-purple-600 border-gray-300 rounded"
+                                />
+                            </template>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-between mt-6 mb-2">
+                        <h2 class="text-xl font-semibold">Shipping Address</h2>
+                        <label for="sameAsBillingAddress" class="text-gray-700">
+                            <input @change="$event.target.checked ? shippingAddress = {...billingAddress} : ''"
+                                   id="sameAsBillingAddress" type="checkbox"
+                                   class="text-purple-600 focus:ring-purple-600 mr-2"> Same as Billing 
+                            </input>
+                        </label>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3 mb-3">
+                        <div>
+                            <x-text-input
+                                type="text"
+                                name="shipping[address1]"
+                                x-model="shippingAddress.address1"
+                                placeholder="Address 1"
+                                class="w-full focus:border-purple-600 focus:ring-purple-600 border-gray-300 rounded"
+                            />
+                        </div>
+                        <div>
+                            <x-text-input
+                                type="text"
+                                name="shipping[address2]"
+                                x-model="shippingAddress.address2"
+                                placeholder="Address 2"
+                                class="w-full focus:border-purple-600 focus:ring-purple-600 border-gray-300 rounded"
+                            />
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3 mb-3">
+                        <div>
+                            <x-text-input
+                                type="text"
+                                name="shipping[city]"
+                                x-model="shippingAddress.city"
+                                placeholder="City"
+                                class="w-full focus:border-purple-600 focus:ring-purple-600 border-gray-300 rounded"
+                            />
+                        </div>
+                        <div>
+                            <x-text-input
+                                name="shipping[zipcode]"
+                                x-model="shippingAddress.zipcode"
+                                type="text"
+                                placeholder="ZipCode"
+                                class="w-full focus:border-purple-600 focus:ring-purple-600 border-gray-300 rounded"
+                            />
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3 mb-3">
+                        <div>
+                            <x-text-input type="select"
+                                     name="shipping[country_code]"
+                                     x-model="shippingAddress.country_code"
+                                     class="w-full focus:border-purple-600 focus:ring-purple-600 border-gray-300 rounded">
+                                <option value="">Select Country</option>
+                                <template x-for="country of countries" :key="country.code">
+                                    <option :selected="country.code === shippingAddress.country_code"
+                                            :value="country.code" x-text="country.name"></option>
+                                </template>
+                            </x-text-input>
+                        </div>
+                        <div>
+                            <template x-if="shippingCountryStates">
+                                <x-text-input type="select"
+                                         name="shipping[state]"
+                                         x-model="shippingAddress.state"
+                                         class="w-full focus:border-purple-600 focus:ring-purple-600 border-gray-300 rounded">
+                                    <option value="">Select State</option>
+                                    <template x-for="[code, state] of Object.entries(shippingCountryStates)"
+                                              :key="code">
+                                        <option :selected="code === shippingAddress.state"
+                                                :value="code" x-text="state"></option>
+                                    </template>
+                                </x-text-input>
+                            </template>
+                            <template x-if="!shippingCountryStates">
+                                <x-text-input
+                                    type="text"
+                                    name="shipping[state]"
+                                    x-model="shippingAddress.state"
+                                    placeholder="State"
+                                    class="w-full focus:border-purple-600 focus:ring-purple-600 border-gray-300 rounded"
+                                />
+                            </template>
+                        </div>
+                    </div>
+
+                    <x-primary-button class="w-full">Update</x-primary-button>
+                </form>
             </div>
+            
         </div>
     </div>
 </x-app-layout>
