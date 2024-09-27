@@ -10,12 +10,14 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('contries', function (Blueprint $table) {
-            $table->drpoColumn('states');
+        // Drop the 'states' column from the 'countries' table (if it exists).
+        Schema::table('countries', function (Blueprint $table) {
+            $table->dropColumn('states');
         });
 
+        // Add a new 'states' column as JSON.
         Schema::table('countries', function (Blueprint $table) {
-            $table->json('states')->nullable;
+            $table->json('states')->nullable();
         });
     }
 
@@ -24,12 +26,14 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('contries', function (Blueprint $table) {
-            $table->drpoColumn('states');
+        // Drop the 'states' column (in case of rollback).
+        Schema::table('countries', function (Blueprint $table) {
+            $table->dropColumn('states');
         });
 
+        // Revert the 'states' column back to text.
         Schema::table('countries', function (Blueprint $table) {
-            $table->text('states')->nullable;
+            $table->text('states')->nullable();
         });
     }
 };
